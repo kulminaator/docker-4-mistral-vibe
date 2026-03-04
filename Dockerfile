@@ -8,15 +8,16 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        git \
        ca-certificates \
-       curl \ 
+       curl \
        gosu \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Mistral Vibe
-RUN curl -LsSf https://astral.sh/uv/install.sh | bash
-RUN $HOME/.local/bin/uv venv /opt/mistral-env
-RUN $HOME/.local/bin/uv pip install -p /opt/mistral-env/bin/python mistral-vibe
+RUN curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR=/usr/local/bin sh
+ENV UV_PYTHON_INSTALL_DIR=/opt/python3
+RUN uv venv /opt/mistral-env
+RUN uv pip install -p /opt/mistral-env/bin/python mistral-vibe
 RUN ln -s /opt/mistral-env/bin/vibe /usr/local/bin/
 RUN ln -s /opt/mistral-env/bin/vibe-acp /usr/local/bin/
 
@@ -29,4 +30,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/bin/bash"]
+CMD ["/opt/mistral-env/bin/vibe"]
