@@ -1,0 +1,32 @@
+FROM debian:bookworm-slim
+
+# Ensure noninteractive installs
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install essential dev tools
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       git \
+       ca-certificates \
+       curl \ 
+       gosu \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Mistral Vibe
+RUN curl -LsSf https://astral.sh/uv/install.sh | bash
+RUN $HOME/.local/bin/uv venv /opt/mistral-env
+RUN $HOME/.local/bin/uv pip install -p /opt/mistral-env/bin/python mistral-vibe
+RUN ln -s /opt/mistral-env/bin/vibe /usr/local/bin/
+RUN ln -s /opt/mistral-env/bin/vibe-acp /usr/local/bin/
+
+
+# Set a working directory
+WORKDIR /src
+
+## build the script to make sure we are not root, nobody should run mistral vibe within the container as root
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
