@@ -1,1 +1,1 @@
-docker build -t docker-4-mistra-vibe:latest .
+docker build -t docker-4-mistral-vibe:latest .
