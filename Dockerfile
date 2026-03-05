@@ -1,5 +1,10 @@
 FROM debian:bookworm-slim
 
+
+LABEL org.opencontainers.image.source=https://github.com/kulminaator/docker-4-mistral-vibe
+LABEL org.opencontainers.image.description="Docker image for running Mistral Vibe in a container"
+LABEL org.opencontainers.image.licenses=MIT
+
 # Ensure noninteractive installs
 ENV DEBIAN_FRONTEND=noninteractive
 
