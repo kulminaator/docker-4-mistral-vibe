@@ -10,6 +10,10 @@ You can find Mistral Vibe itself here - https://github.com/mistralai/mistral-vib
 ## How do i build it?
 To build the image you can run build.sh
 
+## What if i don't want to build it?
+Then you have to trust the images i built:
+https://github.com/kulminaator/docker-4-mistral-vibe/pkgs/container/docker-4-mistral-vibe
+
 ## How do i run it?
 An example is in run.sh
 
