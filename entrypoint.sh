@@ -23,9 +23,13 @@ fi
 groupadd -g $GROUP_ID devgroup 2>/dev/null || true
 useradd --shell /bin/bash -u $USER_ID -g $GROUP_ID -m devuser
 
-# 5. Set the Home environment
+# 5. Create the vibe's home folder by symlinking it under the user and assign it to the correct user and group
+# If the user didn't pass a vibehome via  -v to docker then nothing breaks here.
+chown devuser:devgroup /vibehome
+ln -s /vibehome /home/devuser/.vibe
+
+# 6. Set the Home environment
 export HOME=/home/devuser
 
-# echo "Container started as devuser (UID: $USER_ID, GID: $GROUP_ID)"
 
 exec gosu devuser "$@"

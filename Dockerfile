@@ -21,6 +21,7 @@ RUN uv pip install -p /opt/mistral-env/bin/python mistral-vibe
 RUN ln -s /opt/mistral-env/bin/vibe /usr/local/bin/
 RUN ln -s /opt/mistral-env/bin/vibe-acp /usr/local/bin/
 
+RUN mkdir /vibehome
 
 # Set a working directory
 WORKDIR /src
