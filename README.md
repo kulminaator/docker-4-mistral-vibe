@@ -1,9 +1,11 @@
-# Intro
+# docker-4-mistral-vibe - a simple way to run Mistral Vibe in a sandboxed container 
 
 ## What is this repo ?
 
-# docker-4-mistral-vibe
-Docker image for Mistral Vibe. This just helps you with a local dockered setup.
+This is docker-4-mistral-vibe repository, just building the docker image for running Mistral Vibe. 
+This just helps you with a local dockered setup.
+
+
 You can find Mistral Vibe itself here - https://github.com/mistralai/mistral-vibe
 
 
