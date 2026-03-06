@@ -21,7 +21,9 @@ An example is in run.sh
 
 You can also compose your own execution line in the way of
 ```bash
-docker run -e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) -e MISTRAL_API_KEY=replace_this_with_your_key -v $(pwd):/src  -it --rm ghcr.io/kulminaator/docker-4-mistral-vibe:latest vibe
+docker run -e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) \
+  -e MISTRAL_API_KEY=replace_this_with_your_key -v $(pwd):/src  \
+  -it --rm ghcr.io/kulminaator/docker-4-mistral-vibe:latest vibe
 ```
 Explaining quickly what happens in this line:
 1. It uses your users' user id and group id for the files inside the container (container does not run vibe as root). These are mandatory.
