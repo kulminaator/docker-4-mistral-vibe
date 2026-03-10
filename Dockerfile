@@ -29,7 +29,7 @@ RUN ln -s /opt/mistral-env/bin/vibe-acp /usr/local/bin/
 RUN mkdir /vibehome
 
 # Set a working directory
-WORKDIR /src
+WORKDIR /project
 
 ## build the script to make sure we are not root, nobody should run mistral vibe within the container as root
 COPY entrypoint.sh /entrypoint.sh

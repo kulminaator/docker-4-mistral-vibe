@@ -1,10 +1,10 @@
 #!/bin/sh
 
-DOCKER_RUNSAMPLE="docker run -e LOCAL_UID=\$(id -u) -e LOCAL_GID=\$(id -g) -v \$(pwd):/src .....other.docker.params...... "
+DOCKER_RUNSAMPLE="docker run -e LOCAL_UID=\$(id -u) -e LOCAL_GID=\$(id -g) -v \$(pwd):/project .....other.docker.params...... "
 
 # 1. Check that user is valid
 if [ -z "$LOCAL_UID" ] || [ "$LOCAL_UID" -eq 0 ]; then
-  echo "WARNING: You are running as root. Files created in /src would be owned by root on the host." 
+  echo "WARNING: You are running as root. Files created in /project would be owned by root on the host." 
   echo "You must run with: $DOCKER_RUNSAMPLE"
   exit 1 
 fi
@@ -12,9 +12,9 @@ fi
 USER_ID=${LOCAL_UID}
 GROUP_ID=${LOCAL_GID:-$LOCAL_UID}
 
-# 2. Check that mountpoint of src is ok
-if ! mountpoint -q /src; then
-    echo "ERROR: /src is not mounted from host!"
+# 2. Check that mountpoint of project is ok
+if ! mountpoint -q /project; then
+    echo "ERROR: /project is not mounted from host!"
     echo "Please run: $DOCKER_RUNSAMPLE"
     exit 1
 fi

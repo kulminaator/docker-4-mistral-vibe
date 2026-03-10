@@ -22,12 +22,12 @@ An example is in run.sh
 You can also compose your own execution line in the way of
 ```bash
 docker run -e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) \
-  -e MISTRAL_API_KEY=replace_this_with_your_key -v $(pwd):/src  \
+  -e MISTRAL_API_KEY=replace_this_with_your_key -v $(pwd):/project  \
   -it --rm ghcr.io/kulminaator/docker-4-mistral-vibe:latest vibe
 ```
 Explaining quickly what happens in this line:
 1. It uses your users' user id and group id for the files inside the container (container does not run vibe as root). These are mandatory.
-2. It mounts the current folder into docker's /src folder, the folder where Mistral Vibe will start. This should be your source code folder. This is mandatory.
+2. It mounts the current folder into docker's /project folder, the folder where Mistral Vibe will start. This should be your source code folder. This is mandatory.
 3. It passes your `MISTRAL_API_KEY` via the environment to Mistral Vibe, so it doesn't prompt you for it. This is not mandatory. Just comfy.
 
 
@@ -51,7 +51,7 @@ A full example would looke like this (and since it uses local paths, you could p
 ```bash
 docker  \
     run -e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) -e MISTRAL_API_KEY=$MISTRAL_API_KEY \
-    -v $(pwd):/src -v ~/.vibe:/vibehome \
+    -v $(pwd):/project -v ~/.vibe:/vibehome \
     --network host \
     -it --rm ghcr.io/kulminaator/docker-4-mistral-vibe:latest vibe
 
