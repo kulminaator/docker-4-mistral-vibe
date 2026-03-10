@@ -31,5 +31,5 @@ ln -s /vibehome /home/devuser/.vibe
 # 6. Set the Home environment
 export HOME=/home/devuser
 
-
+. /opt/mistral-env/bin/activate
 exec gosu devuser "$@"
