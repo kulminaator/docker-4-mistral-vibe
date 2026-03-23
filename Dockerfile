@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM python:3.14-slim
 
 LABEL org.opencontainers.image.source=https://github.com/kulminaator/docker-4-mistral-vibe
 LABEL org.opencontainers.image.description="Docker image for running Mistral Vibe in a container"
@@ -17,11 +17,13 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Mistral Vibe
-RUN curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR=/usr/local/bin sh
-ENV UV_PYTHON_INSTALL_DIR=/opt/python3
-RUN uv venv /opt/mistral-env
-RUN uv pip install -p /opt/mistral-env/bin/python mistral-vibe
+RUN git clone https://github.com/mistralai/mistral-vibe.git /opt/mistral-source 
+RUN python3 -m venv /opt/mistral-env && \
+    /opt/mistral-env/bin/pip install --upgrade pip && \
+    cd /opt/mistral-source && /opt/mistral-env/bin/pip install -e .
+
+RUN echo "Vibe version check"
+RUN /opt/mistral-env/bin/vibe --version
 
 RUN mkdir /vibehome
 
