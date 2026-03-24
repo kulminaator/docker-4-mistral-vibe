@@ -4,6 +4,10 @@ LABEL org.opencontainers.image.source=https://github.com/kulminaator/docker-4-mi
 LABEL org.opencontainers.image.description="Docker image for running Mistral Vibe in a container"
 LABEL org.opencontainers.image.licenses=MIT
 
+ARG MISTRAL_VIBE_VERSION
+
+RUN : "${MISTRAL_VIBE_VERSION:?Build argument MISTRAL_VIBE_VERSION needs to be set via --build-arg}"
+
 # Ensure noninteractive installs
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -17,7 +21,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/mistralai/mistral-vibe.git /opt/mistral-source 
+RUN git clone --depth 1 --branch v${MISTRAL_VIBE_VERSION} https://github.com/mistralai/mistral-vibe.git /opt/mistral-source 
 RUN python3 -m venv /opt/mistral-env && \
     /opt/mistral-env/bin/pip install --upgrade pip && \
     cd /opt/mistral-source && /opt/mistral-env/bin/pip install -e .
