@@ -1,4 +1,4 @@
-CURRENT_MISTRAL_VERSION=2.6.2
+CURRENT_MISTRAL_VERSION=2.7.0
 echo "Building with mistral claiming to be $CURRENT_MISTRAL_VERSION"
 
 docker build --no-cache --build-arg MISTRAL_VIBE_VERSION=$CURRENT_MISTRAL_VERSION \
