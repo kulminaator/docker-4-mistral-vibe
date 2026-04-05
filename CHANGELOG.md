@@ -1,6 +1,19 @@
 # Changelog
 
+##
+Versions that are not brought out here only contained Mistral Vibe version bumps.
+
 ## Changes
+
+2.7.3
+* Reordered Dockerfile so that we now preserve more of the previous layers from docker builds
+
+2.6.2
+* Started to use git checkout of precise version instead of latest install via pip
+
+2.5.0
+* Choose a new folder /project instead of the initial /src - too many models confused src with "src" of a project and starte creating directories like /src/src, duh.
+
 2.4.1
 * Updated to Mistral Vibe 2.4.1 
 * Changed starting folder from /src to /project, as many llm models confused /src to be sources folder and started to look for /src/smth in /src/src/smth
