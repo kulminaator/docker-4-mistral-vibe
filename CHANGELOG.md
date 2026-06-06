@@ -5,6 +5,10 @@ Versions that are not brought out here only contained Mistral Vibe version bumps
 
 ## Changes
 
+2.14.0
+* Version bumps
+...
+
 2.10.1 
 * Mostly just bumps of mistral version til here.
 ...
