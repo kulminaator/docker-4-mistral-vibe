@@ -1,4 +1,4 @@
-FROM python:3.14-slim
+FROM python:3.14.10-slim
 
 LABEL org.opencontainers.image.source=https://github.com/kulminaator/docker-4-mistral-vibe
 LABEL org.opencontainers.image.description="Docker image for running Mistral Vibe in a container"
@@ -12,19 +12,16 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        git \
        ca-certificates \
-       curl \
        gosu \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
 ARG MISTRAL_VIBE_VERSION
 RUN : "${MISTRAL_VIBE_VERSION:?Build argument MISTRAL_VIBE_VERSION needs to be set via --build-arg}"
 
-RUN git clone --depth 1 --branch v${MISTRAL_VIBE_VERSION} https://github.com/mistralai/mistral-vibe.git /opt/mistral-source 
 RUN python3 -m venv /opt/mistral-env && \
     /opt/mistral-env/bin/pip install --upgrade pip && \
-    cd /opt/mistral-source && /opt/mistral-env/bin/pip install -e .
+    /opt/mistral-env/bin/pip install "mistral-vibe==${MISTRAL_VIBE_VERSION}"
 
 RUN echo "Vibe version check"
 RUN /opt/mistral-env/bin/vibe --version
